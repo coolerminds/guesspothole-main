@@ -1,0 +1,61 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to DigitalOcean Droplet
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+        run: |
+          set -euo pipefail
+
+          test -n "$DEPLOY_HOST"
+          test -n "$DEPLOY_USER"
+          test -n "$DEPLOY_SSH_KEY"
+
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+
+          ssh -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DEPLOY_PATH='${DEPLOY_PATH:-/root/guessthatpothole}' DEPLOY_PORT='${DEPLOY_PORT:-8080}' bash -s" <<'EOF'
+          set -euo pipefail
+
+          export PATH="/usr/local/bin:/usr/bin:/bin:$PATH"
+          : "${DEPLOY_PATH:=/root/guessthatpothole}"
+          : "${DEPLOY_PORT:=8080}"
+
+          cd "$DEPLOY_PATH"
+          git fetch origin main
+          git checkout main
+          git reset --hard origin/main
+
+          npm ci
+          npm run build
+
+          export PORT="$DEPLOY_PORT"
+          if pm2 describe guessthatpothole >/dev/null 2>&1; then
+            pm2 restart guessthatpothole --update-env
+          else
+            pm2 start server.js --name guessthatpothole
+          fi
+
+          pm2 save
+          EOF
