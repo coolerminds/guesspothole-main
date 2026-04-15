@@ -37,7 +37,7 @@ function getShareMessage(score: number, distance: number, isPastPlay: boolean, u
 
   return [
     scoreEmoji,
-    `${scoreEmoji} I scored ${score.toLocaleString()} / 5,000 on GuessThePothole.com.`,
+    `I scored ${score.toLocaleString()} / 5,000 on GuessThePothole.com.`,
     "",
     `I was ${distance.toFixed(2)} miles away from ${challengeLabel}.`,
     "",
