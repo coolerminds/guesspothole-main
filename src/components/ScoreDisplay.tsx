@@ -65,7 +65,7 @@ export default function ScoreDisplay() {
       <div className="score-display__distance">{distanceMiles} Miles Away</div>
       <button
         type="button"
-        className="score-display__cta"
+        className="leaderboard__submit-btn"
         onClick={() => setPhase("LEADERBOARD")}
       >
         Submit Your Score To Leaderboard!

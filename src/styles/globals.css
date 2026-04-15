@@ -416,6 +416,7 @@ a {
   box-shadow: 0 0 0 3px var(--orange-tint-18), var(--shadow-sm);
 }
 
+.game__share-btn,
 .leaderboard__submit-btn {
   min-height: 56px;
   padding: 0 34px;
@@ -435,6 +436,13 @@ a {
 .leaderboard__submit-btn:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+}
+
+.game__share-block {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-2);
 }
 
 /* Shared notice / message block */
@@ -696,6 +704,33 @@ a {
   font-size: clamp(2rem, 4vw, 2.8rem);
   color: var(--navy);
   margin-bottom: var(--sp-3);
+}
+
+.game__share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  min-width: 260px;
+  padding: 18px 30px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  background: linear-gradient(135deg, #ffd363 0%, #f5bb2f 100%);
+  color: var(--navy-deep);
+  box-shadow: 0 0 22px rgba(245, 206, 83, 0.2);
+}
+
+.game__share-feedback {
+  max-width: 420px;
+  text-align: center;
+  color: var(--success);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .history-card__desc {

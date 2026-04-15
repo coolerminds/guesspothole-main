@@ -44,3 +44,5 @@ next-env.d.ts
 /src/pages/test.tsx
 # backup copy
 /guessthatpothole
+progress.md
+db/visitors.json
