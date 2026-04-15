@@ -22,14 +22,22 @@ const PANEL_COPY = [
 
 type ShareState = "idle" | "shared" | "copied" | "error";
 
+function getScoreEmoji(score: number) {
+  if (score >= 4500) return "🏆";
+  if (score >= 3000) return "🎯";
+  if (score >= 1500) return "👍";
+  return "😬";
+}
+
 function getShareMessage(score: number, distance: number, isPastPlay: boolean, url: string) {
   const challengeLabel = isPastPlay
     ? "a past Fresno County replay challenge"
     : "today's Fresno County daily challenge";
+  const scoreEmoji = getScoreEmoji(score);
 
   return [
-    "📍",
-    `I scored ${score.toLocaleString()} / 5,000 on GuessThePothole.com.`,
+    scoreEmoji,
+    `${scoreEmoji} I scored ${score.toLocaleString()} / 5,000 on GuessThePothole.com.`,
     "",
     `I was ${distance.toFixed(2)} miles away from ${challengeLabel}.`,
     "",
