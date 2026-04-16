@@ -1857,7 +1857,7 @@
     "visitorId": "dd9d285e-e62c-49cd-94d9-cc5ffe8bc671",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
     "firstVisitedAt": "2026-04-10T18:29:21.479Z",
-    "lastVisitedAt": "2026-04-15T21:50:38.984Z",
+    "lastVisitedAt": "2026-04-15T21:57:16.315Z",
     "lastIp": "::1",
     "ipAddresses": [
       "::1"
@@ -2274,6 +2274,14 @@
         "distanceMiles": 0.4777673738785903,
         "guessLat": 36.78030154811091,
         "guessLng": -119.69741821289064
+      },
+      {
+        "type": "visited",
+        "at": "2026-04-15T21:57:16.315Z",
+        "ip": "::1",
+        "potholeId": "pot5",
+        "potholeDate": "2026-03-22",
+        "isPastPlay": false
       }
     ]
   },
